@@ -77,6 +77,20 @@ _ftb_query="${_ftb_query}$(command "$dd" bs=1G count=1 status=none iflag=nonbloc
 
 $fzf_command \
   --ansi \
+  --bind=$binds \
+  --bind="${switch_group[1]}:reload($reload_command -1),${switch_group[2]}:reload($reload_command 1)" \
+  --color=fg+:4 \
+  --cycle \
+  --delimiter='\x00' \
+  --expect=$continuous_trigger,$print_query,$accept_line \
+  --header-lines=$header_lines \
+  --height=${FZF_TMUX_HEIGHT:=$(( lines > LINES / 3 * 2 ? LINES / 3 * 2 : lines ))} \
+  --layout=reverse \
+  --multi \
+  --nth=2,3 \
+  --print-query \
+  --query=$_ftb_query \
+  --tiebreak=begin \
   ${fzf_preview:+--preview=$ftb_preview_init$fzf_preview} \
   $fzf_flags < $tmp_dir/completions.$$ || ret=$?
 
