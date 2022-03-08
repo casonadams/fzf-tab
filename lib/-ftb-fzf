@@ -79,6 +79,7 @@ $fzf_command \
   --ansi \
   --bind=$binds \
   --bind="${switch_group[1]}:reload($reload_command -1),${switch_group[2]}:reload($reload_command 1)" \
+  --color=16 \
   --color=fg+:4 \
   --cycle \
   --delimiter='\x00' \
