@@ -76,8 +76,9 @@ fi
 _ftb_query="${_ftb_query}$(command "$dd" bs=1G count=1 status=none iflag=nonblock < /dev/tty 2>/dev/null)" || true
 
 $fzf_command \
+  --ansi \
   ${fzf_preview:+--preview=$ftb_preview_init$fzf_preview} \
-  $tmp_dir/completions.$$ || ret=$?
+  $fzf_flags < $tmp_dir/completions.$$ || ret=$?
 
 if (( ! use_tmux_popup )); then
   echoti civis >/dev/tty 2>/dev/null
