@@ -64,6 +64,7 @@ if (( ! use_tmux_popup )); then
 fi
 
 cat > $tmp_dir/completions.$$
+sed -i'' -e 's/37/0/g' $tmp_dir/completions.$$
 
 local dd='gdd'
 if (( ${+commands[$dd]} == 0 )) ; then
@@ -79,7 +80,6 @@ $fzf_command \
   --ansi \
   --bind=$binds \
   --bind="${switch_group[1]}:reload($reload_command -1),${switch_group[2]}:reload($reload_command 1)" \
-  --color=16,fg+:4 \
   --cycle \
   --delimiter='\x00' \
   --expect=$continuous_trigger,$print_query,$accept_line \
